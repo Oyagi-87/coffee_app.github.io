@@ -7,77 +7,47 @@ import { render } from '@testing-library/react';
 
 
 function App() {
-
-  class RestCup extends React.Component{
-    constructor(props){
-      super(props);
-      this.state = {
-        cups: 0
-      };
-    }
+const [cups,setCups] = React.useState(0);
+  const [dripTime, setdripTime] = React.useState('00:00:00');
   
-    Plus(prop){
-      this.setState(prevState =>({
-        cups: prevState.cups + prop
-      }));
-    }
-    
+  function increaseCups(num){
+    const newTime = new Date();
+    setdripTime(newTime.toLocaleString());
+    setCups(cups + num);
   }
-
-  const cup = useState(0);
-
-  render();{
+  
+  function decreaseCups(num){
+    setCups(cups - num);
+  }
+  
+  function clearCups(){
+    setdripTime(`ドリップされていません`);
+    setCups(0);
+  }
     return (
       <div className="App">
        <h1>Coffee</h1>
-       <div>SetTime</div>
-       <div>残り{cup}杯です</div>
-       <button onClick={Minusone}>-1</button>
-       <button onClick={Minushalf}>-0.5</button>
-       <div></div>
-       <button onClick={this.Plus(2)}>+2</button>
-       <button onClick={Plusfour}>+4</button>
-       <button onClick={Plussix}>+6</button>
-       <button onClick={Pluseight}>+8</button>
-       <button onClick={Plusten}>+10</button>
+      <div>前回の抽出時刻</div>
+      <div>{dripTime}</div>
+      <p>残り{cups}杯</p>
+      <button onClick={function() { decreaseCups(1); }}>-1</button>
+      <button onClick={function() { decreaseCups(0.5); }}>-0.5</button>
+      <div></div>
+      <button onClick={function() { increaseCups(2); }}>+2</button>
+      <button onClick={function() { increaseCups(4); }}>+4</button>
+      <button onClick={function() { increaseCups(6); }}>+6</button>
+      <button onClick={function() { increaseCups(8); }}>+8</button>
+      <button onClick={function() { increaseCups(10); }}>+10</button>
+      <div></div>
+      <button onClick={function() { clearCups(); }}>clear</button>
       </div>
     );
-  }
+  
 
   
 }
 
-function Plustwo(prop){
-  prop = prop + 2
-  
-}
-
-function Plusfour(prop){
-    
-}
 
 function Plussix(prop){
     
 }
-
-function Pluseight(prop){
-    
-}
-
-function Plusten(prop){
-    
-}
-
-function Minusone(prop){
-    
-}
-
-function Minushalf(prop){
-    
-}
-
-function clear(prop){
-    
-}
-
-export default App;
